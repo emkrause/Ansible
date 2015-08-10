@@ -1,0 +1,17 @@
+---
+- name: import elasticsearch key
+  rpm_key: key=http://packages.elasticsearch.org/GPG-KEY-elasticsearch state=present
+
+- name: copy repo
+  copy: src="elasticsearch.repo" dest=/etc/yum.repos.d/elasticsearch.repo mode=0644
+
+- name: install elasticsearch-1.1.1
+  yum: name=elasticsearch-1.1.1 state=present 
+
+- name: template elasticsearch.yml
+  template: src="elasticsearch.yml" dest="/etc/elasticsearch/" mode=0644
+
+- name: enable elasticsearch service
+  shell: systemctl enable elasticsearch.service
+  notify: 
+  - restart elasticsearch  

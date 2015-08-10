@@ -1,0 +1,6 @@
+---
+- name: cp Logstash Forwarder configuration file
+  template: src="logstash-forwarder" dest="/etc/logstash-forwarder" mode=0755
+
+- name: service logstash-forwarder
+  service: name=logstash-forwarder state=started enabled=yes

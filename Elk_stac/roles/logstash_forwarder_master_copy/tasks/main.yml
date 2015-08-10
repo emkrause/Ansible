@@ -1,0 +1,9 @@
+---
+#- name: copy ssl alleen bij remote hosts
+#  shell: scp /etc/pki/tls/certs/logstash-forwarder.crt {{ logstash_forwarder.user }}@{{ logstash_forwarder.server_private_IP }}:/tmp
+
+#- name: cp ssl
+#  shell: cp /tmp/logstash-forwarder.crt /etc/pki/tls/certs/  
+
+- name: copy certificate to logstash forwarders
+  copy: src=logstash-forwarder.crt dest=/etc/pki/tls/certs/logstash-forwarder.crt mode=0644

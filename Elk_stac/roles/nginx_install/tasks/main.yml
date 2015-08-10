@@ -1,0 +1,11 @@
+---
+- include: install.yml
+
+#- name: Tomcat stop manually
+#  shell: service tomcat-{{ tomcat_instance }} stop
+
+- include: configuration.yml
+
+#- name: deploy iptables rules
+#  template: src=iptables-save dest=/etc/sysconfig/iptables
+#  notify: restart iptables

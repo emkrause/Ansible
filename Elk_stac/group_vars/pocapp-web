@@ -1,0 +1,17 @@
+# apache
+apache:
+  fqdn: 172.24.1.36
+  portnumber: 80
+
+elasticsearch: 
+  disable_dynamic: true
+  network_host: localhost
+  ping_multicast_enabled: false
+
+kibana:
+  user: kibana
+  password: kibana
+  
+logstash_forwarder:
+  user: root
+  server_private_IP: 172.24.1.36

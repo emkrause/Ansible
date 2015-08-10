@@ -1,0 +1,17 @@
+# apache
+apache:
+  fqdn: rovio.krause.nu
+  portnumber: 9020
+
+elasticsearch: 
+  disable_dynamic: true
+  network_host: localhost
+  ping_multicast_enabled: false
+
+kibana:
+  user: kibana
+  password: kibana
+  
+logstash_forwarder:
+  user: root
+  server_private_IP: rovio.krause.nu

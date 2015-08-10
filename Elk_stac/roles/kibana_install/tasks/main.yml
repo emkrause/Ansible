@@ -1,0 +1,16 @@
+---
+- name: kibana install
+  get_url: url=https://download.elasticsearch.org/kibana/kibana/kibana-3.0.1.tar.gz dest=~/kibana-3.0.1.tar.gz
+  register: result
+  
+- name: extract kibana
+  shell: tar xvf kibana-3.0.1.tar.gz
+  when: result|success
+
+- name: template ~/kibana-3.0.1/config.js
+  template: src="config.js" dest="~/kibana-3.0.1/config.js" mode=0644
+
+- name: cp kibana -> /var/www/kibana3
+  shell: cp -R ~/kibana-3.0.1/* /var/www/kibana3/
+  args:
+    creates: /var/www/kibana3/

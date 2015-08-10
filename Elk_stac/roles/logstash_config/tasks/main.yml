@@ -1,0 +1,13 @@
+---
+- name: copy 01-lumberjack-input.conf
+  copy: src="01-lumberjack-input.conf" dest=/etc/logstash/conf.d/ mode=0755
+  
+- name: copy 10-syslog.conf
+  copy: src="10-syslog.conf" dest=/etc/logstash/conf.d/ mode=0755
+  
+- name: copy 30-lumberjack-output.conf
+  copy: src="30-lumberjack-output.conf" dest=/etc/logstash/conf.d/ mode=0755
+  notify:
+  - restart logstash
+
+

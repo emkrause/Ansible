@@ -1,0 +1,17 @@
+--- 
+- name: download logstash forwarder
+  get_url: url=http://packages.elasticsearch.org/logstashforwarder/centos/logstash-forwarder-0.3.1-1.x86_64.rpm dest=~/logstash-forwarder-0.3.1-1.x86_64.rpm
+  register: result
+
+- name: install rpm
+  yum: name=logstash-forwarder-0.3.1-1.x86_64.rpm state=present
+  when: result|success
+  
+- name: copy conf file
+  copy: src="init.d-logstash-forwarder" dest="/etc/init.d/logstash-forwarder" mode=0755
+
+- name: copy conf file
+  copy: src="etc-logstash-forwarder" dest="/etc/sysconfig/logstash-forwarder" mode=0755  
+  notify: 
+  - restart logstash-forwarder
+  

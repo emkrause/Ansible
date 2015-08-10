@@ -1,0 +1,30 @@
+---
+- name: install elk stac
+  hosts: dev-p3-elk
+  user: root
+  vars:
+    - download_url: http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-x64.tar.gz
+    - download_folder: /opt
+    - java_name: "{{ download_folder }}/jdk1.8.0_25"
+    - java_archive: "{{ download_folder }}/jdk-8u25-linux-x64.tar.gz"
+    
+  roles:
+    - java
+    - elasticsearch_install
+    - kibana_install
+    - apache_install
+    - logstash_install
+    - logstash_forwarder_install
+
+- name: configure elk stac
+  hosts: dev-p3-elk
+  user: root
+
+  roles:
+    - apache_config
+    - logstash_config    
+    - logstash_forwarder_config
+    
+
+    
+    

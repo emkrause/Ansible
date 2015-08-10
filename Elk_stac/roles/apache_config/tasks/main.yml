@@ -1,0 +1,23 @@
+---
+- name: copy config
+  template: src="kibana3.conf" dest="/etc/httpd/conf.d/" mode=0644
+
+- name: apache user (no unix user)
+  shell: htpasswd -cb /etc/httpd/conf.d/kibana-htpasswd {{ kibana.user }} {{ kibana.password }} 
+  args:
+    creates: /etc/httpd/conf.d/kibana-htpasswd
+
+- name: start service
+  shell: systemctl start httpd.service
+  
+- name: enable https.service
+  shell: systemctl enable httpd.service
+  
+# chkconfig --levels 235 httpd on
+  
+- name: remove welcome
+  shell: rm -f /etc/httpd/conf.d/welcome.conf
+  args:
+    removes: /etc/httpd/conf.d/welcome.conf
+  
+  

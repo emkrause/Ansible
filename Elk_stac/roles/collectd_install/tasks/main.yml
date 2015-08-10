@@ -1,0 +1,14 @@
+---
+- name: install collectd
+  yum: name=collectd state=present
+  
+- name: systemctl start collectd
+  shell: systemctl start collectd.service
+  
+- name: enable collectd
+  shell: systemctl enable collectd.service
+  
+- name: start collectd
+  shell: service collectd start
+
+# http://linuxdrops.com/install-collectd-statistics-collecter-on-centos-rhel-ubuntu-debian/

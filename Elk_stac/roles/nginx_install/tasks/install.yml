@@ -1,0 +1,17 @@
+---
+
+- name: install nginx
+  yum: name=nginx state=present
+  register: result
+
+- name: make config dir
+  when: result|success
+  shell: mkdir /usr/www
+  args:
+    creates: /usr/www
+
+- name: make config dir
+  when: result|success
+  shell: mkdir /usr/www/app
+  args:
+    creates: /usr/www/app

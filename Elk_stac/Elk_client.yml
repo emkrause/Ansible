@@ -1,0 +1,23 @@
+---
+# This playbook deploys a Redis set of 1 master, 1 slave and 1 sentinel. 
+
+- name: install logstash-forwarder
+  hosts: dev-p3
+  user: root
+    
+  roles:
+    - logstash_forwarder_install
+
+- name: copy certificates
+  hosts: dev-p3
+  user: root
+
+  roles: 
+    - logstash_forwarder_master_copy
+
+- name: configure elk stac
+  hosts: dev-p3
+  user: root
+
+  roles:
+    - logstash_forwarder_config
